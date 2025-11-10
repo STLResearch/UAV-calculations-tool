@@ -1,0 +1,156 @@
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+/* Dashboard layout */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 220px;
+  background-color: #1f2937;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar button {
+  background-color: transparent;
+  border: none;
+  color: #cbd5e1;
+  padding: 0.5rem 0;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar button:hover {
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebar button:focus {
+  outline: none;
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* Main content styling */
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Card container for each section */
+.card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* Section title */
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+/* Grid for inputs */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+.grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.grid input[type="number"] {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+/* Buttons */
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+/* Results list */
+.results {
+  margin-top: 1rem;
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 0.95rem;
+}
+
+.results li {
+  margin-bottom: 0.4rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+  }
+
+  .sidebar button {
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
