@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -174,4 +174,3 @@ const KSectionCalculations = ({
 };
 
 export default KSectionCalculations;
-
