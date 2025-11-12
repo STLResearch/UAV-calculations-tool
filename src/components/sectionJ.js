@@ -12,15 +12,15 @@ export default function SectionJ() {
   ];
 
   const [rows, setRows] = useState(initial);
-  const [otherFraction, setOtherFraction] = useState(0.001);
+  const [otherFraction] = useState(0.001);
 
-  const updateCell = (index, field, value) => {
-    setRows(prev => {
-      const copy = prev.map(r => ({ ...r }));
-      copy[index][field] = value === "" ? "" : Number(value);
-      return copy;
-    });
-  };
+  // const updateCell = (index, field, value) => {
+  //   setRows(prev => {
+  //     const copy = prev.map(r => ({ ...r }));
+  //     copy[index][field] = value === "" ? "" : Number(value);
+  //     return copy;
+  //   });
+  // };
 
   const computeLarge = (small, medium) => 1 - (Number(small || 0) + Number(medium || 0));
   const fmt = v => (v == null || Number.isNaN(v) ? "—" : Math.round(v * 100) / 100);
@@ -98,7 +98,7 @@ export default function SectionJ() {
 
   const sumRow = (arr, prop) => arr.reduce((sum, r) => sum + r[prop], 0);
 
-  const totals = (arr) => ({ small: sumRow(arr, "small"), medium: sumRow(arr, "medium"), large: sumRow(arr, "large"), total: sumRow(arr, "total") });
+  // const totals = (arr) => ({ small: sumRow(arr, "small"), medium: sumRow(arr, "medium"), large: sumRow(arr, "large"), total: sumRow(arr, "total") });
 
   const renderTable = (title, data, showTotals = true) => (
     <>
@@ -142,3 +142,4 @@ export default function SectionJ() {
     </section>
   );
 }
+
