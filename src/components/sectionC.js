@@ -68,13 +68,13 @@ export default function SectionC({ inputs }) {
       <button onClick={handleCalculate}>Calculate</button>
       {results && (
         <ul className="results">
-          <li>Annual UAV Tonnes Max: {results.annualUAVTonnesMax.toFixed(2)}</li>
-          <li>Annual UAV Flights Max: {results.annualUAVFlightsMax.toFixed(0)}</li>
-          <li>Avg Flights per UAV per Year: {results.avgFlightsPerUAVPerYear.toFixed(2)}</li>
-          <li>Annual Flights Lower: {results.annualFlightsLower.toFixed(0)}</li>
-          <li>Annual Flights Upper: {results.annualFlightsUpper.toFixed(0)}</li>
-          <li>Annual UAVs Lower: {results.annualUAVsLower.toFixed(2)}</li>
-          <li>Annual UAVs Upper: {results.annualUAVsUpper.toFixed(2)}</li>
+          <li><strong>Annual UAV Tonnes Max:</strong> {results.annualUAVTonnesMax.toFixed(2)}</li>
+          <li><strong>Annual UAV Flights Max:</strong> {results.annualUAVFlightsMax.toFixed(0)}</li>
+          <li><strong>Avg Flights per UAV per Year:</strong> {results.avgFlightsPerUAVPerYear.toFixed(2)}</li>
+          <li><strong>Annual Flights Lower:</strong> {results.annualFlightsLower.toFixed(0)}</li>
+          <li><strong>Annual Flights Upper:</strong> {results.annualFlightsUpper.toFixed(0)}</li>
+          <li><strong>Annual UAVs Lower:</strong> {results.annualUAVsLower.toFixed(2)}</li>
+          <li><strong>Annual UAVs Upper:</strong> {results.annualUAVsUpper.toFixed(2)}</li>
         </ul>
       )}
     </section>
