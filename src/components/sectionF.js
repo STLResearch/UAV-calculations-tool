@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 
 export default function SectionF({ inputs }) {
@@ -46,10 +44,10 @@ export default function SectionF({ inputs }) {
       const kmPerLocation = type.km / UAV_Locations;
 
       const annualFlightsPerLocation = Math.ceil(kmPerLocation / coveredLinearPathPerFlight) * type.coverageTimesPerYear;
-      // const UAVsPerLocation = annualFlightsPerLocation; // same as Excel formula
+      
 
       const totalFlightsForType = annualFlightsPerLocation * UAV_Locations;
-    // const totalUAVsForType = UAVsPerLocation * UAV_Locations;
+  
 
       totalFlights += totalFlightsForType;
       totalUAVs += UAV_Locations;
@@ -89,7 +87,7 @@ export default function SectionF({ inputs }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {infraData.types.map((type, index) => (
           <div key={index} className="p-2 border rounded">
-            <h3 className="text-sm font-semibold">{type.name}</h3>
+            <h3 className="text-sm font-semibold mb-1">{type.name}</h3>
             <label className="flex flex-col text-xs mt-1">
               km
               <input
@@ -175,27 +173,22 @@ export default function SectionF({ inputs }) {
                   <td className="border p-1">{res.UAV_Locations}</td>
                   <td className="border p-1">{res.kmPerLocation.toFixed(2)}</td>
                   <td className="border p-1">{res.annualFlightsPerLocation}</td>
-                  <td className="border p-1">{res.totalFlightsForType}</td>
-                  <td className="border p-1">{res.UAVsPerLocation}</td>
-                  <td className="border p-1">{res.totalUAVsForType}</td>
                 </tr>
               ))}
             </tbody>
           </table>
 
           <ul className="mt-2 text-sm">
-            <li>Total UAV Flights: {results.totalFlights}</li>
-            <li>Total UAVs: {results.totalUAVs}</li>
-            <li>Annual Flights per UAV: {results.annualFlightsPerUAV.toFixed(0)}</li>
-            <li>Annual UAV Flights - Lower: {results.annualFlightsLower.toFixed(0)}</li>
-            <li>Annual UAV Flights - Upper: {results.annualFlightsUpper.toFixed(0)}</li>
-            <li>Annual UAVs - Lower: {results.annualUAVsLower.toFixed(0)}</li>
-            <li>Annual UAVs - Upper: {results.annualUAVsUpper.toFixed(0)}</li>
+            <li><strong>Total UAV Flights:</strong> {results.totalFlights}</li>
+            <li><strong>Total UAVs:</strong> {results.totalUAVs}</li>
+            <li><strong>Annual Flights per UAV:</strong> {results.annualFlightsPerUAV.toFixed(0)}</li>
+            <li><strong>Annual UAV Flights - Lower:</strong> {results.annualFlightsLower.toFixed(0)}</li>
+            <li><strong>Annual UAV Flights - Upper:</strong> {results.annualFlightsUpper.toFixed(0)}</li>
+            <li><strong>Annual UAVs - Lower:</strong> {results.annualUAVsLower.toFixed(0)}</li>
+            <li><strong>Annual UAVs - Upper:</strong> {results.annualUAVsUpper.toFixed(0)}</li>
           </ul>
         </div>
       )}
     </section>
   );
 }
-
-
