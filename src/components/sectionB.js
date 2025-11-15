@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 export default function SectionB({ inputs }) {
   const [recreational, setRecreational] = useState({
     uavPercentLower: 0.588,
@@ -42,10 +43,10 @@ export default function SectionB({ inputs }) {
       <button onClick={handleCalculate}>Calculate</button>
       {results && (
         <ul className="results">
-          <li>Estimated UAVs (Lower): {results.uavsLower.toFixed(0)}</li>
-          <li>Estimated UAVs (Upper): {results.uavsUpper.toFixed(0)}</li>
-          <li>Annual UAV Flights (Lower): {results.annualFlightsLower.toFixed(0)}</li>
-          <li>Annual UAV Flights (Upper): {results.annualFlightsUpper.toFixed(0)}</li>
+          <li><strong>Estimated UAVs (Lower):</strong> {results.uavsLower.toFixed(0)}</li>
+          <li><strong>Estimated UAVs (Upper):</strong> {results.uavsUpper.toFixed(0)}</li>
+          <li><strong>Annual UAV Flights (Lower):</strong> {results.annualFlightsLower.toFixed(0)}</li>
+          <li><strong>Annual UAV Flights (Upper):</strong> {results.annualFlightsUpper.toFixed(0)}</li>
         </ul>
       )}
     </section>
