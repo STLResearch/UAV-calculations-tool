@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 export default function SectionE({ inputs }) {
   const [agriData, setAgriData] = useState({
     agricultureLand: { hectares: 2000, locations: 8, coveragePerYear: 4 },
@@ -40,7 +41,7 @@ export default function SectionE({ inputs }) {
     const croplandHectaresPerLocation = cropland.hectares / croplandLocations;
     const forestHectaresPerLocation = forestLocations > 0
       ? forestParks.hectares / forestLocations
-      : maxAreaPerUAV; // fallback if 0 locations
+      : maxAreaPerUAV;
 
     // 4. Annual UAV Flights per Location using Covered Area per Flight
     const agriFlightsPerLocation = Math.ceil(agriHectaresPerLocation / coverageAreaPerFlight) * agricultureLand.coveragePerYear;
@@ -89,7 +90,7 @@ export default function SectionE({ inputs }) {
       <div className="grid">
         {["agricultureLand", "cropland", "forestParks"].map(section => (
           <div key={section}>
-            <h3 className="text-sm font-semibold mb-1">{section.replace(/([A-Z])/g, ' $1')}</h3>
+            <h3 style={{ textTransform: 'capitalize', marginBottom: '0.5rem' }}>{section.replace(/([A-Z])/g, ' $1')}</h3>
             <label>
               Hectares
               <input type="number" value={agriData[section].hectares} onChange={e => handleChange(section, "hectares", e.target.value)} />
@@ -119,22 +120,22 @@ export default function SectionE({ inputs }) {
 
       {results && (
         <ul className="results">
-          <li>Agriculture UAV Locations: {results.agriLocations}</li>
-          <li>Cropland UAV Locations: {results.croplandLocations}</li>
-          <li>Forest UAV Locations: {results.forestLocations}</li>
-          <li>Agriculture Hectares per Location: {results.agriHectaresPerLocation}</li>
-          <li>Cropland Hectares per Location: {results.croplandHectaresPerLocation}</li>
-          <li>Forest Hectares per Location: {results.forestHectaresPerLocation}</li>
-          <li>Agriculture Annual Flights per Location: {results.agriFlightsPerLocation}</li>
-          <li>Cropland Annual Flights per Location: {results.croplandFlightsPerLocation}</li>
-          <li>Forest Annual Flights per Location: {results.forestFlightsPerLocation}</li>
-          <li>Total UAV Flights: {results.totalFlights}</li>
-          <li>Total UAVs: {results.totalUAVs}</li>
-          <li>Annual Flights per UAV: {results.annualFlightsPerUAV.toFixed(2)}</li>
-          <li>Annual UAV Flights - Lower: {results.annualFlightsLower.toFixed(2)}</li>
-          <li>Annual UAV Flights - Upper: {results.annualFlightsUpper.toFixed(2)}</li>
-          <li>Annual UAVs - Lower: {results.annualUAVsLower.toFixed(2)}</li>
-          <li>Annual UAVs - Upper: {results.annualUAVsUpper.toFixed(2)}</li>
+          <li><strong>Agriculture UAV Locations:</strong> {results.agriLocations}</li>
+          <li><strong>Cropland UAV Locations:</strong> {results.croplandLocations}</li>
+          <li><strong>Forest UAV Locations:</strong> {results.forestLocations}</li>
+          <li><strong>Agriculture Hectares per Location:</strong> {results.agriHectaresPerLocation}</li>
+          <li><strong>Cropland Hectares per Location:</strong> {results.croplandHectaresPerLocation}</li>
+          <li><strong>Forest Hectares per Location:</strong> {results.forestHectaresPerLocation}</li>
+          <li><strong>Agriculture Annual Flights per Location:</strong> {results.agriFlightsPerLocation}</li>
+          <li><strong>Cropland Annual Flights per Location:</strong> {results.croplandFlightsPerLocation}</li>
+          <li><strong>Forest Annual Flights per Location:</strong> {results.forestFlightsPerLocation}</li>
+          <li><strong>Total UAV Flights:</strong> {results.totalFlights}</li>
+          <li><strong>Total UAVs:</strong> {results.totalUAVs}</li>
+          <li><strong>Annual Flights per UAV:</strong> {results.annualFlightsPerUAV.toFixed(2)}</li>
+          <li><strong>Annual UAV Flights - Lower:</strong> {results.annualFlightsLower.toFixed(2)}</li>
+          <li><strong>Annual UAV Flights - Upper:</strong> {results.annualFlightsUpper.toFixed(2)}</li>
+          <li><strong>Annual UAVs - Lower:</strong> {results.annualUAVsLower.toFixed(2)}</li>
+          <li><strong>Annual UAVs - Upper:</strong> {results.annualUAVsUpper.toFixed(2)}</li>
         </ul>
       )}
     </section>
