@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+
 export default function SectionA({ inputs, setInputs }) {
+
   const [results, setResults] = useState(null);
 
   const handleChange = (e) => {
@@ -24,11 +26,11 @@ export default function SectionA({ inputs, setInputs }) {
     const operationalHoursPerYear = operationalHoursPerDay * operationalDaysPerWeek * operationalWeeksPerYear * (operationalTimeInFlightPct / 100);
     const flightsPerYear = operationalHoursPerYear / (averageHoursPerFlight + averageOverheadHoursPerFlight);
     const coveredLinearPathPerFlight = averageVelocity * averageHoursPerFlight;
-    const coveredAreaPerFlightSqKm = (averageVelocity * coverageWidthPerPath) / 1000;
-    const coveredAreaPerFlightHa = coveredAreaPerFlightSqKm * 100;
+    const coveredAreaPerFlightHa = (averageVelocity * coverageWidthPerPath) / 10;
     const maxAnnualStructures = maxStructuresPerWeek * operationalWeeksPerYear;
 
-    setResults({ operationalHoursPerYear, flightsPerYear, coveredLinearPathPerFlight, coveredAreaPerFlightSqKm, coveredAreaPerFlightHa, maxAnnualStructures });
+    setResults({ operationalHoursPerYear, flightsPerYear, coveredLinearPathPerFlight, coveredAreaPerFlightHa, maxAnnualStructures });
+
   };
 
   return (
@@ -37,7 +39,7 @@ export default function SectionA({ inputs, setInputs }) {
       <div className="grid">
         {Object.entries(inputs).map(([key, value]) => (
           <label key={key}>
-            <span>{key.replace(/([A-Z])/g, ' $1')}</span>
+            <span style={{ textTransform: 'capitalize' }}>{key.replace(/([A-Z])/g, ' $1')}</span>
             <input type="number" name={key} value={value} onChange={handleChange} />
           </label>
         ))}
@@ -45,11 +47,11 @@ export default function SectionA({ inputs, setInputs }) {
       <button onClick={handleCalculate}>Calculate</button>
       {results && (
         <ul className="results">
-          <li>Operational Hours per Year: {results.operationalHoursPerYear.toFixed(2)}</li>
-          <li>Flights per Year: {results.flightsPerYear.toFixed(2)}</li>
-          <li>Covered Linear Path per Flight (km): {results.coveredLinearPathPerFlight.toFixed(2)}</li>
-          <li>Covered Area per Flight (ha): {results.coveredAreaPerFlightHa.toFixed(2)}</li>
-          <li>Max Annual Structures: {results.maxAnnualStructures.toFixed(2)}</li>
+          <li><strong>Operational Hours per Year:</strong> {results.operationalHoursPerYear.toFixed(2)}</li>
+          <li><strong>Flights per Year:</strong> {results.flightsPerYear.toFixed(2)}</li>
+          <li><strong>Covered Linear Path per Flight (km):</strong> {results.coveredLinearPathPerFlight.toFixed(2)}</li>
+          <li><strong>Covered Area per Flight (ha):</strong> {results.coveredAreaPerFlightHa.toFixed(2)}</li>
+          <li><strong>Max Annual Structures:</strong> {results.maxAnnualStructures.toFixed(2)}</li>
         </ul>
       )}
     </section>
