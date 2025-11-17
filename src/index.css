@@ -1,8 +1,3 @@
-
-* {
-  box-sizing: border-box;
-}
-
 body, html {
   margin: 0;
   padding: 0;
@@ -13,19 +8,21 @@ body, html {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f8fafc;
   color: #1e293b;
-  line-height: 1.5;
+  overflow-x: hidden;
+
+
+
 }
 
 /* Dashboard layout */
 .dashboard {
   display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+
 }
 
 /* Sidebar styling */
 .sidebar {
-  width: 280px;
+  width: 240px;
   background: #ffff;
   color: #f1f5f9;
   display: flex;
@@ -46,7 +43,7 @@ body, html {
 
 /* Sidebar Buttons */
 .sidebar button {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  background:  linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
   border: none;
   color: #ffffff;
   padding: 0.75rem 1rem;
@@ -63,7 +60,7 @@ body, html {
 /* Hover – subtle highlight */
 .sidebar button:hover {
   color: #ffffff;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #2d66c2ff 0%, #2563eb 100%);
   transform: translateX(3px);
   box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
 }
@@ -72,25 +69,27 @@ body, html {
 .sidebar button:focus {
   outline: none;
   color: #ffffff;
-  background: #2563eb;
-  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+  background: linear-gradient(135deg, #1e4bb8 0%, #3b82f6 100%); /* brighter/different gradient */
+  box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.7); /* strong glow effect */
+  transform: translateX(3px); /* same as hover for consistency */
 }
 
-/* Active / Selected – clear highlight */
+/* Active / Selected – noticeable blue highlight */
 .sidebar button.active {
-  background: #2563eb;  /* Darker blue for selected */
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); /* darker + brighter blue gradient */
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.6); /* subtle glow in blue */
   transform: translateX(3px);
 }
+
 
 
 /* Main content styling */
 .content {
   flex: 1;
   padding: 2rem;
-  overflow-y: auto;
   max-width: calc(100vw - 280px);
+  height: 100%
 }
 
 /* Card container for each section */
@@ -114,7 +113,7 @@ body, html {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.75rem;
-  color: #1e293b;
+  color: #1f2e46;
   font-weight: 700;
   border-bottom: 3px solid #60a5fa;
   padding-bottom: 0.5rem;
