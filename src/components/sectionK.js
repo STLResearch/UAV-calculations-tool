@@ -148,11 +148,11 @@ const SectionK = ({
     <div style={{ padding: 16 }}>
       <h2 style={{ textAlign: "center" }}>K. Chart Calculations</h2>
 
-      {/* --- Tables --- */}
+     
       {renderTable("Annual Flights", flightsRows)}
       {renderTable("Annual UAVs", uavsRows)}
 
-      {/* --- Charts --- */}
+      
       <h2 style={{ textAlign: "center", marginTop: 40 }}>Results</h2>
       <p style={{ textAlign: "center", fontStyle: "italic" }}>
         Volume Estimates for Year 2049
@@ -174,3 +174,4 @@ const SectionK = ({
 };
 
 export default SectionK;
+
