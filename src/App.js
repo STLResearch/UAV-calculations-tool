@@ -26,10 +26,10 @@ function App() {
     averageVelocity: 20,
     coverageWidthPerPath: 100,
     maxStructuresPerWeek: 7,
-    maxKmPerUAV: 250,       // for sections F/G
+    maxKmPerUAV: 250,       
     coveredLinearPathPerFlight: 20, 
     maxStructuresPerUAV: 336,
-    dailyAreaPerFlight: 2,    // for H
+    dailyAreaPerFlight: 2,   
     avgEventServedPct: 50
   });
 
