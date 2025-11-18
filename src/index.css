@@ -14,13 +14,13 @@ body, html {
 
 }
 
-/* Dashboard layout */
+
 .dashboard {
   display: flex;
 
 }
 
-/* Sidebar styling */
+
 .sidebar {
   width: 240px;
   background: #ffff;
@@ -41,7 +41,7 @@ body, html {
   color: #60a5fa;
 }
 
-/* Sidebar Buttons */
+
 .sidebar button {
   background:  linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
   border: none;
@@ -57,7 +57,6 @@ body, html {
   position: relative;
 }
 
-/* Hover – subtle highlight */
 .sidebar button:hover {
   color: #ffffff;
   background: linear-gradient(135deg, #2d66c2ff 0%, #2563eb 100%);
@@ -65,26 +64,24 @@ body, html {
   box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
 }
 
-/* Focus – same as active but with outline */
+
 .sidebar button:focus {
   outline: none;
   color: #ffffff;
-  background: linear-gradient(135deg, #1e4bb8 0%, #3b82f6 100%); /* brighter/different gradient */
-  box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.7); /* strong glow effect */
-  transform: translateX(3px); /* same as hover for consistency */
+  background: linear-gradient(135deg, #1e4bb8 0%, #3b82f6 100%);/
+  box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.7); 
+  transform: translateX(3px); 
 }
 
-/* Active / Selected – noticeable blue highlight */
 .sidebar button.active {
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); /* darker + brighter blue gradient */
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); 
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.6); /* subtle glow in blue */
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.6);
   transform: translateX(3px);
 }
 
 
 
-/* Main content styling */
 .content {
   flex: 1;
   padding: 2rem;
@@ -92,7 +89,7 @@ body, html {
   height: 100%
 }
 
-/* Card container for each section */
+
 .card {
   background: #ffffff;
   padding: 2rem;
@@ -108,7 +105,7 @@ body, html {
   transform: translateY(-2px);
 }
 
-/* Section title */
+
 .card h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -126,7 +123,7 @@ body, html {
   margin-bottom: 1rem;
 }
 
-/* Grid for inputs */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -160,7 +157,7 @@ body, html {
   background: #fff;
 }
 
-/* Buttons */
+
 button {
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
@@ -185,7 +182,6 @@ button:active {
   transform: translateY(0);
 }
 
-/* Results list */
 .results {
   margin-top: 2rem;
   list-style-type: none;
@@ -214,7 +210,7 @@ button:active {
   color: #1e293b;
 }
 
-/* Table styles */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -255,7 +251,7 @@ table tbody tr:last-child {
   background: #f1f5f9;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 1024px) {
   .sidebar {
     width: 250px;
