@@ -25,7 +25,7 @@ export default function SectionJ() {
   const computeLarge = (small, medium) => 1 - (Number(small || 0) + Number(medium || 0));
   const fmt = v => (v == null || Number.isNaN(v) ? "—" : Math.round(v * 100) / 100);
 
-  // First table: distributions Small/Medium/Large + Other
+  
   const computeDistributions = () => {
     const data = rows.map(r => ({
       ...r,
@@ -43,7 +43,7 @@ export default function SectionJ() {
 
   const distributions = computeDistributions();
 
-  // Flights
+
   const computeFlights = (type) => {
     const key = type === "lower" ? "lowerFlights" : "upperFlights";
     const flights = rows.map(r => ({
@@ -76,9 +76,9 @@ export default function SectionJ() {
   const lowerFlights = computeFlights("lower");
   const upperFlights = computeFlights("upper");
 
-  const G357 = 1036; // fixed for Other UAVs
+  const G357 = 1036; 
 
-  // UAVs LOWER
+ 
   const uavsLower = lowerFlights.map(r => {
     if (r.key === "other") {
       return { key: r.key, name: r.name, small: r.small / G357, medium: r.medium / G357, large: r.large / G357, total: (r.small + r.medium + r.large) / G357 };
@@ -87,7 +87,7 @@ export default function SectionJ() {
     }
   });
 
-  // UAVs UPPER
+
   const uavsUpper = upperFlights.map(r => {
     if (r.key === "other") {
       return { key: r.key, name: r.name, small: r.small / G357, medium: r.medium / G357, large: r.large / G357, total: (r.small + r.medium + r.large) / G357 };
@@ -142,3 +142,4 @@ export default function SectionJ() {
     </section>
   );
 }
+
