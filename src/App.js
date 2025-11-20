@@ -28,7 +28,6 @@ function App() {
     maxStructuresPerWeek: 7,
     maxKmPerUAV: 250,       
     coveredLinearPathPerFlight: 20, 
-    maxStructuresPerUAV: 336,
     dailyAreaPerFlight: 2,   
     avgEventServedPct: 50
   });
