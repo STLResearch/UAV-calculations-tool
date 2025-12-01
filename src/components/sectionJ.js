@@ -43,7 +43,7 @@ export default function SectionJ() {
     const otherDist = { key: "other", name: "Other (average)", small: avgSmall, medium: avgMedium, large: avgLarge, total: 1 };
     const allDistributions = [...distributions, otherDist];
 
-    // ---- flights ----
+ 
     const computeFlights = (type) => {
       const key = type === "lower" ? "lowerFlights" : "upperFlights";
       const flights = rows.map(r => ({
@@ -76,8 +76,7 @@ export default function SectionJ() {
     const lowerFlights = computeFlights("lower");
     const upperFlights = computeFlights("upper");
 
-    // ---- UAVs ----
-    const computeUAVs = (flights) =>
+   const computeUAVs = (flights) =>
       flights.map(r => {
         if (r.key === "other") return { ...r, small: r.small / otherUAVs, medium: r.medium / otherUAVs, large: r.large / otherUAVs, total: (r.small + r.medium + r.large) / otherUAVs };
         return { ...r, small: r.small / r.flightsPerUAV, medium: r.medium / r.flightsPerUAV, large: r.large / r.flightsPerUAV, total: (r.small + r.medium + r.large) / r.flightsPerUAV };
@@ -210,3 +209,4 @@ const renderTable = (title, data, showFlights = false) => {
     </section>
   );
 }
+
