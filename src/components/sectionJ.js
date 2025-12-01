@@ -43,7 +43,7 @@ export default function SectionJ() {
     const otherDist = { key: "other", name: "Other (average)", small: avgSmall, medium: avgMedium, large: avgLarge, total: 1 };
     const allDistributions = [...distributions, otherDist];
 
-   
+    // ---- flights ----
     const computeFlights = (type) => {
       const key = type === "lower" ? "lowerFlights" : "upperFlights";
       const flights = rows.map(r => ({
@@ -76,7 +76,7 @@ export default function SectionJ() {
     const lowerFlights = computeFlights("lower");
     const upperFlights = computeFlights("upper");
 
-  
+    // ---- UAVs ----
     const computeUAVs = (flights) =>
       flights.map(r => {
         if (r.key === "other") return { ...r, small: r.small / otherUAVs, medium: r.medium / otherUAVs, large: r.large / otherUAVs, total: (r.small + r.medium + r.large) / otherUAVs };
@@ -89,7 +89,23 @@ export default function SectionJ() {
     setComputed({ distributions: allDistributions, lowerFlights, upperFlights, uavsLower, uavsUpper });
   };
 
-  const renderTable = (title, data, editable = false, showFlights = false) => (
+const renderTable = (title, data, showFlights = false) => {
+  const isDistribution = title.includes("Vehicle Type"); 
+
+ 
+  const totalSmall = isDistribution ? 0 : data.reduce((sum, r) => sum + (r.small || 0), 0);
+  const totalMedium = isDistribution ? 0 : data.reduce((sum, r) => sum + (r.medium || 0), 0);
+  const totalLarge = isDistribution ? 0 : data.reduce((sum, r) => sum + (r.large || 0), 0);
+  const totalAll = isDistribution ? 0 : data.reduce((sum, r) => sum + (r.total || 0), 0);
+
+ 
+  const formatCell = (value) => {
+    if (value == null || Number.isNaN(value)) return "-";
+    if (isDistribution) return Math.round(value * 100) + "%";
+    return fmt(value);
+  };
+
+  return (
     <>
       <h3>{title}</h3>
       <table>
@@ -98,41 +114,51 @@ export default function SectionJ() {
             <th>Category</th>
             <th>Small</th>
             <th>Medium</th>
-            {showFlights && <th>Lower / Upper Flights</th>}
+            {showFlights && <th>Flights</th>}
             <th>Large</th>
             <th>Total</th>
           </tr>
         </thead>
+
         <tbody>
-          {data.map((r, idx) => (
+          {data.map(r => (
             <tr key={r.key}>
               <td>{r.name}</td>
-              <td>
-                {editable && r.key !== "other" ? <input type="number" value={r.small} onChange={e => updateCell(idx, "small", e.target.value)}/> : fmt(r.small)}
-              </td>
-              <td>
-                {editable && r.key !== "other" ? <input type="number" value={r.medium} onChange={e => updateCell(idx, "medium", e.target.value)}/> : fmt(r.medium)}
-              </td>
-              {showFlights && r.key !== "other" && (
-                <td>
-                  <input type="number" value={r.total} onChange={e => updateCell(idx, "lowerFlights", e.target.value)}/>
-                </td>
-              )}
-              <td>{fmt(r.large)}</td>
-              <td>{fmt(r.total)}</td>
+
+              <td>{formatCell(r.small)}</td>
+              <td>{formatCell(r.medium)}</td>
+
+              {showFlights && <td>{formatCell(r.total)}</td>}
+
+              <td>{formatCell(r.large)}</td>
+              <td>{formatCell(r.total)}</td>
             </tr>
           ))}
-          
+
+        
+          {!isDistribution && (
+            <tr style={{ fontWeight: "bold", background: "#f2f2f2" }}>
+              <td>Total</td>
+              <td>{fmt(totalSmall)}</td>
+              <td>{fmt(totalMedium)}</td>
+              {showFlights && <td>{fmt(totalAll)}</td>}
+              <td>{fmt(totalLarge)}</td>
+              <td>{fmt(totalAll)}</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>
   );
+};
+
+
 
   return (
     <section className="card">
       <h2>J. Vehicle Type Inputs</h2>
 
- 
+   
       <div className="grid">
         {rows.map((r, idx) => (
           <div key={r.key}>
@@ -166,11 +192,12 @@ export default function SectionJ() {
         </div>
       </div>
 
- 
+  
       <button onClick={calculate}>
         Calculate
       </button>
 
+  
       {computed && (
         <>
           {renderTable("1) Vehicle Type Distributions", computed.distributions, false)}
@@ -183,4 +210,3 @@ export default function SectionJ() {
     </section>
   );
 }
-
