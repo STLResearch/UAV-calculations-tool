@@ -10,10 +10,10 @@ export default function SectionF({ inputs }) {
       { name: "Railways Freight-only", km: 10, coverageTimesPerYear: 104 },
       { name: "Pipelines", km: 13, coverageTimesPerYear: 4 },
       { name: "High-voltage Transmission Lines", km: 40, coverageTimesPerYear: 4 },
-
     ],
-    maxLinearPathPerUAV: 250.0, // C$27
-    coveredLinearPathPerFlight : 20.0,// C$44}
+    maxLinearPathPerUAV: 250, 
+    coveredLinearPathPerFlight: 20, 
+    UAVFlightsPerYear: 675, 
     uavCapacityPctLower: 5,
     uavCapacityPctUpper: 50,
   });
@@ -33,36 +33,43 @@ export default function SectionF({ inputs }) {
   };
 
   const handleCalculate = () => {
-    const { types, uavCapacityPctLower, uavCapacityPctUpper, maxLinearPathPerUAV, coveredLinearPathPerFlight  } = infraData;
-
+    const { types, uavCapacityPctLower, uavCapacityPctUpper, maxLinearPathPerUAV, coveredLinearPathPerFlight, UAVFlightsPerYear } = infraData;
 
     let totalFlights = 0;
     let totalUAVs = 0;
 
     const typeResults = types.map(type => {
+     
       const UAV_Locations = Math.ceil(type.km / maxLinearPathPerUAV) || 1;
+
+  
       const kmPerLocation = type.km / UAV_Locations;
 
-      const annualFlightsPerLocation = Math.ceil(kmPerLocation / coveredLinearPathPerFlight) * type.coverageTimesPerYear;
       
+      const annualFlightsPerLocation = Math.ceil(kmPerLocation / coveredLinearPathPerFlight) * type.coverageTimesPerYear;
 
+      
+      const UAVsPerLocation = Math.ceil(annualFlightsPerLocation / UAVFlightsPerYear);
+
+      
       const totalFlightsForType = annualFlightsPerLocation * UAV_Locations;
-  
+      const totalUAVsForType = UAVsPerLocation * UAV_Locations;
 
       totalFlights += totalFlightsForType;
-      totalUAVs += UAV_Locations;
+      totalUAVs += totalUAVsForType;
 
       return {
         ...type,
         UAV_Locations,
         kmPerLocation,
         annualFlightsPerLocation,
-
+        UAVsPerLocation,
+        totalFlightsForType,
+        totalUAVsForType,
       };
     });
 
     const annualFlightsPerUAV = totalFlights / totalUAVs;
-
     const annualFlightsLower = totalFlights * (uavCapacityPctLower / 100);
     const annualFlightsUpper = totalFlights * (uavCapacityPctUpper / 100);
     const annualUAVsLower = totalUAVs * (uavCapacityPctLower / 100);
@@ -81,98 +88,114 @@ export default function SectionF({ inputs }) {
   };
 
   return (
-    <section className="card p-4">
-      <h2 className="font-bold text-lg mb-4">F. Infrastructure Monitoring</h2>
+    <section className="card">
+      <h2>F. Infrastructure Monitoring</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid">
         {infraData.types.map((type, index) => (
-          <div key={index} className="p-2 border rounded">
-            <h3 className="text-sm font-semibold mb-1">{type.name}</h3>
-            <label className="flex flex-col text-xs mt-1">
+          <div key={index} >
+            <h3 >{type.name}</h3>
+            <label >
               km
               <input
                 type="number"
                 value={type.km}
                 onChange={e => handleChange(index, "km", e.target.value)}
-                className="border rounded p-1 text-xs"
+                
               />
             </label>
-            <label className="flex flex-col text-xs mt-1">
+            <label>
               Coverage Times per Year
               <input
                 type="number"
                 value={type.coverageTimesPerYear}
                 onChange={e => handleChange(index, "coverageTimesPerYear", e.target.value)}
-                className="border rounded p-1 text-xs"
+                
               />
             </label>
           </div>
         ))}
 
-        <label className="flex flex-col mt-2">
+        <label>
           UAV % of Max Capacity - Lower
           <input
             type="number"
             value={infraData.uavCapacityPctLower}
             onChange={e => handleUAVCapacityChange("uavCapacityPctLower", e.target.value)}
-            className="border rounded p-1"
+            
           />
         </label>
-        <label className="flex flex-col mt-2">
+        <label >
           UAV % of Max Capacity - Upper
           <input
             type="number"
             value={infraData.uavCapacityPctUpper}
             onChange={e => handleUAVCapacityChange("uavCapacityPctUpper", e.target.value)}
-            className="border rounded p-1"
+           
           />
         </label>
-        <label className="flex flex-col mt-2">
-          maxLinearPathPerUAV
+        <label >
+          Max Linear Path per UAV (km)
           <input
             type="number"
             value={infraData.maxLinearPathPerUAV}
             onChange={e => handleUAVCapacityChange("maxLinearPathPerUAV", e.target.value)}
-            className="border rounded p-1"
+          
           />
         </label>
-        <label className="flex flex-col mt-2">
-          coveredLinearPathPerFlight
+        <label >
+          Covered Linear Path per Flight (km)
           <input
             type="number"
             value={infraData.coveredLinearPathPerFlight}
             onChange={e => handleUAVCapacityChange("coveredLinearPathPerFlight", e.target.value)}
-            className="border rounded p-1"
+           
+          />
+        </label>
+        <label >
+          Max Annual Flights per UAV
+          <input
+            type="number"
+            value={infraData.UAVFlightsPerYear}
+            onChange={e => handleUAVCapacityChange("UAVFlightsPerYear", e.target.value)}
+           
           />
         </label>
       </div>
 
       <button
         onClick={handleCalculate}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        
       >
         Calculate
       </button>
 
       {results && (
-        <div className="mt-4 p-4 border rounded bg-gray-50">
-          <h3 className="font-semibold mb-2">Results</h3>
-          <table className="w-full text-sm border-collapse">
+        <div>
+          <h3 >Results</h3>
+
+          <table>
             <thead>
               <tr>
-                <th className="border p-1">Type</th>
-                <th className="border p-1">UAV Locations</th>
-                <th className="border p-1">km per Location</th>
-                <th className="border p-1">Annual Flights per Location</th>
+                <th >Type</th>
+                <th >UAV Locations</th>
+                <th >km per Location</th>
+                <th >Annual Flights per Location</th>
+                <th >UAVs per Location</th>
+                <th >Total UAV Flights</th>
+                <th >Total UAVs</th>
               </tr>
             </thead>
             <tbody>
               {results.typeResults.map((res, idx) => (
                 <tr key={idx}>
-                  <td className="border p-1">{res.name}</td>
-                  <td className="border p-1">{res.UAV_Locations}</td>
-                  <td className="border p-1">{res.kmPerLocation.toFixed(2)}</td>
-                  <td className="border p-1">{res.annualFlightsPerLocation}</td>
+                  <td >{res.name}</td>
+                  <td >{res.UAV_Locations}</td>
+                  <td >{res.kmPerLocation.toFixed(2)}</td>
+                  <td >{res.annualFlightsPerLocation}</td>
+                  <td >{res.UAVsPerLocation}</td>
+                  <td >{res.totalFlightsForType}</td>
+                  <td >{res.totalUAVsForType}</td>
                 </tr>
               ))}
             </tbody>
