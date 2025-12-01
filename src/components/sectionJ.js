@@ -43,7 +43,7 @@ export default function SectionJ() {
     const otherDist = { key: "other", name: "Other (average)", small: avgSmall, medium: avgMedium, large: avgLarge, total: 1 };
     const allDistributions = [...distributions, otherDist];
 
-    // ---- flights ----
+   
     const computeFlights = (type) => {
       const key = type === "lower" ? "lowerFlights" : "upperFlights";
       const flights = rows.map(r => ({
@@ -76,7 +76,7 @@ export default function SectionJ() {
     const lowerFlights = computeFlights("lower");
     const upperFlights = computeFlights("upper");
 
-    // ---- UAVs ----
+  
     const computeUAVs = (flights) =>
       flights.map(r => {
         if (r.key === "other") return { ...r, small: r.small / otherUAVs, medium: r.medium / otherUAVs, large: r.large / otherUAVs, total: (r.small + r.medium + r.large) / otherUAVs };
@@ -132,7 +132,7 @@ export default function SectionJ() {
     <section className="card">
       <h2>J. Vehicle Type Inputs</h2>
 
-      {/* INPUTS PANEL */}
+ 
       <div className="grid">
         {rows.map((r, idx) => (
           <div key={r.key}>
@@ -155,7 +155,6 @@ export default function SectionJ() {
           </div>
         ))}
 
-        {/* Other Fraction & Other UAVs */}
         <div>
           <div>Other Options</div>
           <label>Other Fraction (%):
@@ -167,12 +166,11 @@ export default function SectionJ() {
         </div>
       </div>
 
-      {/* CALCULATE BUTTON */}
+ 
       <button onClick={calculate}>
         Calculate
       </button>
 
-      {/* TABLES */}
       {computed && (
         <>
           {renderTable("1) Vehicle Type Distributions", computed.distributions, false)}
@@ -185,3 +183,4 @@ export default function SectionJ() {
     </section>
   );
 }
+
