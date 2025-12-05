@@ -19,6 +19,7 @@ const defaultVolumes = {
   Vol_Rec: { flightsLow: 917280, flightsHigh: 2076360 },
 };
 
+
 const volumeLabels = {
   flightsLow: "Flights (Low)",
   flightsHigh: "Flights (High)",
@@ -32,7 +33,7 @@ export default function FinancialImpactModule() {
   const [showDetails, setShowDetails] = useState(false);
   const [volumes, setVolumes] = useState(defaultVolumes);
 
-  
+ 
   const [inputs, setInputs] = useState({
     price_delivery: 7.0,       // Avg. Revenue per Delivery
     price_uam: 180.0,           // Avg. Ticket per UAM Trip
@@ -61,13 +62,13 @@ export default function FinancialImpactModule() {
 
   const calculate = () => setShowResults(true);
 
- 
+
   const getFlightsLow = (obj) => (obj && obj.flightsLow) || 0;
   const getFlightsHigh = (obj) => (obj && obj.flightsHigh) || 0;
   const getUavsLow = (obj) => (obj && obj.uavsLow) || 0;
   const getUavsHigh = (obj) => (obj && obj.uavsHigh) || 0;
 
-
+  
   const { 
     price_delivery, price_uam, price_inspection, price_rec,
     fee_permit_drone, fee_permit_uam,
@@ -87,16 +88,13 @@ export default function FinancialImpactModule() {
   const UAVs_UAM_Low = getUavsLow(volumes.Vol_UAM);
   const UAVs_UAM_High = getUavsHigh(volumes.Vol_UAM);
 
-  
   const Vol_Inspection_Low = getFlightsLow(volumes.Vol_Inspection);
   const Vol_Inspection_High = getFlightsHigh(volumes.Vol_Inspection);
   const UAVs_Inspection_Low = getUavsLow(volumes.Vol_Inspection);
   const UAVs_Inspection_High = getUavsHigh(volumes.Vol_Inspection);
 
-
   const Vol_Rec_Low = getFlightsLow(volumes.Vol_Rec);
   const Vol_Rec_High = getFlightsHigh(volumes.Vol_Rec);
-
 
   const Rev_Flight_Delivery_Low = Vol_Delivery_Low * price_delivery;
   const Rev_Flight_UAM_Low = Vol_UAM_Low * price_uam;
@@ -112,13 +110,11 @@ export default function FinancialImpactModule() {
   const Total_Flight_Fees_High =
     Rev_Flight_Delivery_High + Rev_Flight_UAM_High + Rev_Flight_Insp_High + Rev_Flight_Rec_High;
 
-
   const Count_Small_UAVs_Low = UAVs_Delivery_Low + UAVs_Inspection_Low;
   const Total_Permits_Low = Count_Small_UAVs_Low * fee_permit_drone + UAVs_UAM_Low * fee_permit_uam;
 
   const Count_Small_UAVs_High = UAVs_Delivery_High + UAVs_Inspection_High;
   const Total_Permits_High = Count_Small_UAVs_High * fee_permit_drone + UAVs_UAM_High * fee_permit_uam;
-
 
   const Alloc_Protocol_Low = Total_Flight_Fees_Low * (split_protocol / 100);
   const Alloc_Owner_Low = Total_Flight_Fees_Low * (split_owners / 100);
@@ -140,7 +136,6 @@ export default function FinancialImpactModule() {
   const Grand_Total_Low = Total_Flight_Fees_Low + Total_Permits_Low;
   const Grand_Total_High = Total_Flight_Fees_High + Total_Permits_High;
 
-
   const Summary_TotalMarketRevenue = bound === "low" ? Grand_Total_Low : Grand_Total_High;
   const Summary_TotalCityRevenue = bound === "low" ? Total_City_Rev_Low : Total_City_Rev_High;
   const Summary_Jobs = bound === "low" ? Jobs_Low : Jobs_High;
@@ -157,74 +152,85 @@ export default function FinancialImpactModule() {
     <section className="card">
       <h2 style={{ fontSize: 22, marginBottom: 16 }}>Financial & Economic Impact</h2>
 
- 
-      <div className="grid">
-  
-        {["price_delivery","price_uam","price_inspection","price_rec"].map((key) => (
-          <label key={key}>
-            <span>{
-              {
-                price_delivery: "Avg. Revenue per Delivery",
-                price_uam: "Avg. Ticket per UAM Trip",
-                price_inspection: "Avg. Revenue per Inspection",
-                price_rec: "Avg. Fee per Rec Flight"
-              }[key]
-            }</span>
-            <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
-          </label>
-        ))}
+   
+<div>
+  <h3>New Inputs</h3>
+  <div className="grid">
 
+    {["price_delivery","price_uam","price_inspection","price_rec"].map((key) => (
+      <label key={key}>
+        <span>{
+          {
+            price_delivery: "Avg. Revenue per Delivery",
+            price_uam: "Avg. Ticket per UAM Trip",
+            price_inspection: "Avg. Revenue per Inspection",
+            price_rec: "Avg. Fee per Rec Flight"
+          }[key]
+        }</span>
+        <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
+      </label>
+    ))}
 
-        {["fee_permit_drone","fee_permit_uam"].map((key) => (
-          <label key={key}>
-            <span>{
-              {
-                fee_permit_drone: "Annual Permit (Small UAV)",
-                fee_permit_uam: "Annual Permit (Air Taxi)"
-              }[key]
-            }</span>
-            <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
-          </label>
-        ))}
+    {["fee_permit_drone","fee_permit_uam"].map((key) => (
+      <label key={key}>
+        <span>{
+          {
+            fee_permit_drone: "Annual Permit (Small UAV)",
+            fee_permit_uam: "Annual Permit (Air Taxi)"
+          }[key]
+        }</span>
+        <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
+      </label>
+    ))}
 
-        {["split_owners","split_protocol","split_city"].map((key) => (
-          <label key={key}>
-            <span>{
-              {
-                split_owners: "Corridor Owner Share",
-                split_protocol: "Protocol Ops Share",
-                split_city: "City % of Owner Share"
-              }[key]
-            }</span>
-            <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
-          </label>
-        ))}
+    {["split_owners","split_protocol","split_city"].map((key) => (
+      <label key={key}>
+        <span>{
+          {
+            split_owners: "Corridor Owner Share",
+            split_protocol: "Protocol Ops Share",
+            split_city: "City % of Owner Share"
+          }[key]
+        }</span>
+        <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
+      </label>
+    ))}
 
-        {["econ_multiplier","avg_salary"].map((key) => (
-          <label key={key}>
-            <span>{
-              {
-                econ_multiplier: "Economic Multiplier",
-                avg_salary: "Avg. Industry Salary"
-              }[key]
-            }</span>
-            <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
-          </label>
-        ))}
+    {["econ_multiplier","avg_salary"].map((key) => (
+      <label key={key}>
+        <span>{
+          {
+            econ_multiplier: "Economic Multiplier",
+            avg_salary: "Avg. Industry Salary"
+          }[key]
+        }</span>
+        <input type="number" name={key} value={inputs[key]} onChange={handleInputChange} />
+      </label>
+    ))}
 
-        {Object.keys(volumes).map((cat) =>
-          Object.keys(volumes[cat]).map((key) => (
-            <label key={`${cat}_${key}`}>
-              <span>{cat.replace("Vol_","")} {volumeLabels[key]}</span>
-              <input
-                type="number"
-                value={volumes[cat][key]}
-                onChange={(e) => handleVolumeChange(cat, key, e.target.value)}
-              />
-            </label>
-          ))
-        )}
-      </div>
+  </div>
+ <hr style={{ border: "none", borderBottom: "3px solid #60a5fa", margin: "20px 0" }} />
+
+  <h3>Reused Inputs (Volumes)</h3>
+  <div className="grid">
+
+    {Object.keys(volumes).map((cat) =>
+      Object.keys(volumes[cat]).map((key) => (
+        <label key={`${cat}_${key}`}>
+          <span>{cat.replace("Vol_", "")} {volumeLabels[key]}</span>
+          <input
+            type="number"
+            value={volumes[cat][key]}
+            onChange={(e) => handleVolumeChange(cat, key, e.target.value)}
+          />
+        </label>
+      ))
+    )}
+
+  </div>
+
+</div>
+
 
       <button onClick={calculate}>Calculate</button>
 
@@ -264,6 +270,7 @@ export default function FinancialImpactModule() {
         </div>
       )}
 
+ 
       {showResults && (
         <div style={{ display: "flex", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
           <Card label="Total Market Revenue" value={fmtCurrency(Summary_TotalMarketRevenue)} />
@@ -272,7 +279,6 @@ export default function FinancialImpactModule() {
         </div>
       )}
 
-      {/* --- Revenue Allocation Table --- */}
       {showResults && (
         <div style={{ marginBottom: 16 }}>
           <h4 style={{ marginBottom: 8 }}>Revenue Allocation Table (Ohio Model)</h4>
@@ -318,6 +324,7 @@ export default function FinancialImpactModule() {
         </div>
       )}
 
+
       {showResults && showDetails && (
         <div style={{ marginBottom: 16 }}>
           <h4 style={{ marginBottom: 8 }}>Detailed Calculations — {bound === "low" ? "Lower" : "Upper"} Bound</h4>
@@ -342,6 +349,7 @@ export default function FinancialImpactModule() {
           </table>
         </div>
       )}
+
 
       {showResults && (
         <div>
@@ -378,4 +386,3 @@ function Card({ label, value }) {
     </div>
   );
 }
-
