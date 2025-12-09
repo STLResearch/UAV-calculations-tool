@@ -441,7 +441,7 @@ export default function DroneScorecardMap() {
             </div>
             <div className="legend-item">
               <div className="legend-color" style={{ backgroundColor: "#38a169" }}></div>
-              <div className="legend-label">Excellent (90+)</div>
+              <div className="legend-label">Excellent</div>
             </div>
           </div>
         </div>
@@ -481,7 +481,7 @@ export default function DroneScorecardMap() {
             </div>
             <div className="legend-item">
               <div className="legend-color" style={{ backgroundColor: "#38a169" }}></div>
-              <div className="legend-label">Excellent (90+)</div>
+              <div className="legend-label">Excellent</div>
             </div>
           </div>
         </div>
@@ -693,4 +693,5 @@ export default function DroneScorecardMap() {
     </div>
   );
 }
+
 
