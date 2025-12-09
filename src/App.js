@@ -12,6 +12,7 @@ import SectionJ from "./components/sectionJ";
 import SectionK from "./components/sectionK";
 import FinancialImpactModule from "./components/FinancialImpactModule";
 import InfrastructureFiscalModule from "./components/InfrastructureFiscalModule";
+import DroneScorecardMap from "./components/DroneScorecardMap";
 
 function App() {
   const [activeSection, setActiveSection] = useState("A. General Inputs");
@@ -48,7 +49,8 @@ function App() {
           "D. Urban Air Mobility","E. Agriculture Use","F. Linear Inspection",
           "G. Structure Inspection","H. Emergency Response","I. Other",
           "J. Distributions by Vehicle Type","K. Chart Calculations",
-          "L. FinancialImpactModule", "M. InfrastructureFiscalModule"
+          "L. FinancialImpactModule", "M. InfrastructureFiscalModule",
+          "N. Drone Scorecard Map"  
         ].map(sec => (
           <button 
             key={sec} 
@@ -73,13 +75,10 @@ function App() {
         {activeSection === "J. Distributions by Vehicle Type" && <SectionJ inputs={inputs} />}
         {activeSection === "K. Chart Calculations" && <SectionK />}
         {activeSection === "L. FinancialImpactModule" && 
-        
-        <FinancialImpactModule 
-        />}
-
+        <FinancialImpactModule />}
         {activeSection === "M. InfrastructureFiscalModule" &&
-        <InfrastructureFiscalModule 
-        />}
+        <InfrastructureFiscalModule />}
+        {activeSection === "N. Drone Scorecard Map" && <DroneScorecardMap />}
       </main>
     </div>
   );
