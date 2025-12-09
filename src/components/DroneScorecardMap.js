@@ -13,7 +13,6 @@ import {
   LineElement,
 } from "chart.js";
 
-// Register ChartJS components
 ChartJS.register(
   RadialLinearScale,
   ArcElement,
@@ -45,6 +44,7 @@ export default function DroneScorecardMap() {
   const [hoverInfo, setHoverInfo] = useState(null);
   const [selectedFactor, setSelectedFactor] = useState("drone_score_2025");
   const [showMap, setShowMap] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -117,17 +117,23 @@ export default function DroneScorecardMap() {
 
   // Zoom to selected feature when it changes
   useEffect(() => {
-    if (selectedFeature) {
+    if (selectedFeature && mapRef.current) {
       zoomToFeature(selectedFeature);
     }
   }, [selectedFeature]);
+
+  // Zoom to selected feature when map loads and feature is selected
+  useEffect(() => {
+    if (mapLoaded && selectedFeature && mapRef.current) {
+      zoomToFeature(selectedFeature);
+    }
+  }, [mapLoaded, selectedFeature]);
 
   const handleSelectState = (stateName) => {
     const feature = geoData?.features.find(f => f.properties.name === stateName);
     if (feature) {
       setSelectedFeature(feature);
       setShowMap(true);
-      zoomToFeature(feature);
     }
   };
 
@@ -152,7 +158,7 @@ export default function DroneScorecardMap() {
       });
     };
     flattenCoords(feature.geometry.coordinates);
-    mapRef.current.fitBounds(bounds, { padding: 20, maxZoom: 8 });
+    mapRef.current.fitBounds(bounds, { padding: 40, duration: 1500 });
   };
 
   // --- LAYERS ---
@@ -539,6 +545,12 @@ export default function DroneScorecardMap() {
                   setHoverInfo(f ? { feature: f, x: e.point.x, y: e.point.y } : null);
                 }}
                 onClick={handleMapClick}
+                onLoad={() => {
+                  setMapLoaded(true);
+                  if (selectedFeature) {
+                    zoomToFeature(selectedFeature);
+                  }
+                }}
                 attributionControl={false}
               >
                 <Source id="states" type="geojson" data={geoData}>
@@ -687,4 +699,3 @@ export default function DroneScorecardMap() {
     </div>
   );
 }
-
