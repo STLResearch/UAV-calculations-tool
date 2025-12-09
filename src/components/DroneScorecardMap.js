@@ -247,9 +247,9 @@ export default function DroneScorecardMap() {
     layout: {
       "text-field": ["get", "name"],
       "text-size": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
+        "interpolate", 
+        ["linear"], 
+        ["zoom"], 
         3, 8,     // Smaller zoom levels: 8px text
         4, 10,    // Slightly zoomed in: 10px text
         5, 12,    // More zoom: 12px text
@@ -259,9 +259,9 @@ export default function DroneScorecardMap() {
       "text-anchor": "center",
       "text-justify": "center",
       "text-font": ["Open Sans Bold", "Arial Unicode MS Regular"],
-      "text-allow-overlap": false,
-      "text-ignore-placement": false,
-      "text-padding": 4,
+      "text-allow-overlap": true,
+      "text-ignore-placement": true,
+      "text-padding": 2,
       "text-line-height": 1.2,
       "visibility": "visible"  // Fixed: simple string value instead of stops
     },
@@ -286,13 +286,11 @@ export default function DroneScorecardMap() {
     layout: {
       "text-field": ["to-string", ["get", selectedFactor]],
       "text-size": ["interpolate", ["linear"], ["zoom"], 3, 8, 6, 10, 10, 14],
-      "text-anchor": "top",
+      "text-anchor": "bottom",
       "text-justify": "center",
-      "text-offset": [0, 1],
+      "text-offset": [0, -1],
       "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-      "text-allow-overlap": false,
-      "text-ignore-placement": false,
-      "text-padding": 4
+      "text-allow-overlap": true
     },
     paint: {
       "text-color": "#000000",
@@ -307,13 +305,11 @@ export default function DroneScorecardMap() {
     layout: {
       "text-field": ["to-string", ["get", "drone_score_2023"]],
       "text-size": ["interpolate", ["linear"], ["zoom"], 3, 8, 6, 10, 10, 14],
-      "text-anchor": "top",
+      "text-anchor": "bottom",
       "text-justify": "center",
-      "text-offset": [0, 1],
+      "text-offset": [0, -1],
       "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-      "text-allow-overlap": false,
-      "text-ignore-placement": false,
-      "text-padding": 4
+      "text-allow-overlap": true
     },
     paint: {
       "text-color": "#000000",
@@ -328,13 +324,11 @@ export default function DroneScorecardMap() {
     layout: {
       "text-field": ["to-string", ["get", "drone_score_2025"]],
       "text-size": ["interpolate", ["linear"], ["zoom"], 3, 8, 6, 10, 10, 14],
-      "text-anchor": "top",
+      "text-anchor": "bottom",
       "text-justify": "center",
-      "text-offset": [0, 1],
+      "text-offset": [0, -1],
       "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-      "text-allow-overlap": false,
-      "text-ignore-placement": false,
-      "text-padding": 4
+      "text-allow-overlap": true
     },
     paint: {
       "text-color": "#000000",
